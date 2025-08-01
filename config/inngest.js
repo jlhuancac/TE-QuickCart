@@ -10,7 +10,7 @@ export const syncUserCreation = inngest.createFunction(
     {
         id: 'sync-user-from-clerk',
     },
-    {event: 'clerk.user.created'},
+    {event: 'clerk/user.created'},
     async ({event}) => {
         const { id, first_name, last_name, email_addresses, image_url } = event.data
         const userData = {
@@ -24,12 +24,12 @@ export const syncUserCreation = inngest.createFunction(
     }
 )
 
-//inngest Function to save product data to a database
-export const syncProductCreation = inngest.createFunction(
+//inngest Function to update user data to a database
+export const syncUserUpdation = inngest.createFunction(
     {
         id: 'upload-user-from-clerk'
     },
-    {event: 'clerk.product.updated'},
+    {event: 'clerk/user.updated'},
     async ({event}) => {
         const { id, name, last_name, email_address, image_url } = event.data
         const userData = {
@@ -48,7 +48,7 @@ export const syncUserDeletion = inngest.createFunction(
     {
     id: 'delete-user-from-clerk'
     },
-    {event: 'clerk.user.deleted'},
+    {event: 'clerk/user.deleted'},
     async ({event}) => {
         const { id } = event.data
 
