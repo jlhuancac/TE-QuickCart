@@ -9,9 +9,12 @@ export async function GET(request) {
     try {
         
         const { userId } = getAuth(request)
+        console.log("UserID del cliente:", userId);
 
         await connectDB()
         const user = await User.findById(userId)
+        console.log("Usuario encontrado en MongoDB:", user);
+        
 
         if (!user) {
             return NextResponse.json({ success: false, message: "Usuario no encontrado" })
@@ -20,6 +23,7 @@ export async function GET(request) {
         return NextResponse.json({ success: true, user})
 
     } catch (error) {
+        console.error(error);
         return NextResponse.json({ success: false, message: error.message})
     }
 }
